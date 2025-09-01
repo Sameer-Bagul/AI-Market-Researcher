@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Noto+Sans:wght@300;400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(240, 10%, 7%);
+  --foreground: hsl(0, 0%, 100%);
+  --card: hsl(240, 10%, 11%);
+  --card-foreground: hsl(0, 0%, 100%);
+  --popover: hsl(240, 10%, 11%);
+  --popover-foreground: hsl(0, 0%, 100%);
+  --primary: hsl(240, 94%, 50%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(240, 10%, 16%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --muted: hsl(240, 10%, 16%);
+  --muted-foreground: hsl(240, 5%, 62%);
+  --accent: hsl(240, 10%, 16%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(240, 8%, 23%);
+  --input: hsl(240, 8%, 23%);
+  --ring: hsl(240, 94%, 50%);
+  --radius: 8px;
+  --font-sans: "Space Grotesk", "Noto Sans", system-ui, sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+  
+  /* Market research specific colors */
+  --market-bg: hsl(240, 12%, 6%);
+  --market-card: hsl(240, 12%, 11%);
+  --market-border: hsl(240, 8%, 22%);
+  --market-border-hover: hsl(240, 8%, 33%);
+  --market-text-muted: hsl(240, 5%, 62%);
+  --market-primary: hsl(240, 94%, 50%);
+  --market-primary-hover: hsl(240, 94%, 45%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 7%);
+  --foreground: hsl(0, 0%, 100%);
+  --card: hsl(240, 10%, 11%);
+  --card-foreground: hsl(0, 0%, 100%);
+  --popover: hsl(240, 10%, 11%);
+  --popover-foreground: hsl(0, 0%, 100%);
+  --primary: hsl(240, 94%, 50%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(240, 10%, 16%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --muted: hsl(240, 10%, 16%);
+  --muted-foreground: hsl(240, 5%, 62%);
+  --accent: hsl(240, 10%, 16%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(240, 8%, 23%);
+  --input: hsl(240, 8%, 23%);
+  --ring: hsl(240, 94%, 50%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
+}
+
+@layer utilities {
+  .animate-fade-in-down {
+    animation: fade-in-down 0.6s ease-out;
+  }
+  
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out 0.2s both;
+  }
+  
+  .loading-skeleton {
+    background: linear-gradient(90deg, hsl(240, 10%, 16%) 25%, hsl(240, 10%, 20%) 50%, hsl(240, 10%, 16%) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+}
+
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

@@ -1,0 +1,125 @@
+[
+  {
+    "executiveSummary": {
+      "Market Definition": "string",
+      "History of the Market": "string",
+      "Market Dynamics": "string",
+      "Key findings": [
+        "string"
+      ]
+    }
+  },
+  {
+    "marketEstimate": {
+      "Current Market Size": "string",
+      "Historic Market Size": [
+        {
+          "year": "number",
+          "marketSize": "number",
+          "unit": "string"
+        }
+      ],
+      "CAGR": "string",
+      "Future Market Estimate": [
+        {
+          "year": "number",
+          "marketSize": "number",
+          "unit": "string"
+        }
+      ],
+      "References": "string",
+      "Assumptions": [
+        "string"
+      ]
+    }
+  },
+  {
+    "competitorAnalysis": [
+      {
+        "name": "string",
+        "market share percentage": {
+          "value": "number",
+          "unit": "string"
+        },
+        "market share in amount": {
+          "value": "number",
+          "unit": "string"
+        },
+        "overview": "string",
+        "products": ["string"],
+        "financialOverview": "string",
+        "swot": {
+          "strengths": ["string"],
+          "weaknesses": ["string"],
+          "opportunities": ["string"],
+          "threats": ["string"]
+        },
+        "strategies": ["string"],
+        "assumptions": ["string"],
+        "reference": ["string"]
+      }
+    ]
+  },
+  {
+    "marketGrowthTrends": {
+      "swotAnalysis": {
+        "strengths": "string",
+        "weaknesses": "string",
+        "opportunities": "string",
+        "threats": "string"
+      },
+      "pestelAnalysis": {
+        "political": "string",
+        "economic": "string",
+        "social": "string",
+        "technological": "string",
+        "environmental": "string",
+        "legal": "string"
+      },
+      "porterAnalysis": {
+        "competitiveRivalry": "string",
+        "supplierPower": "string",
+        "buyerPower": "string",
+        "threatOfSubstitution": "string",
+        "threatOfNewEntrants": "string"
+      }
+    }
+  },
+  {
+    "marketSegmentation": {
+      "By Segment": [
+        {
+          "Segment Name": "string",
+          "Market Share": [
+            {
+              "value": "number",
+              "unit": "string"
+            }
+          ],
+          "By Sub-Segment": [
+            {
+              "Sub-Segment Name": "string",
+              "Market Share": [
+                {
+                  "value": "number",
+                  "unit": "string"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "By Region": [
+        {
+          "Region Name": "string",
+          "Market Share": [
+            {
+              "value": "number",
+              "unit": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

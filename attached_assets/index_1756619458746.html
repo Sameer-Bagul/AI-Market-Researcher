@@ -1,0 +1,320 @@
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --primary-color: #1313ec;
+      }
+    </style>
+</head>
+<body class="bg-[#111118] text-white" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
+<div class="relative flex size-full min-h-screen flex-col dark group/design-root overflow-x-hidden" x-data="{ activePill: 'api' }">
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#282839] bg-[#111118]/80 px-10 py-3 backdrop-blur-sm">
+<div class="flex items-center gap-4">
+<svg class="size-6 text-[var(--primary-color)]" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M6 6H42L36 24L42 42H6L12 24L6 6Z" fill="currentColor"></path></svg>
+<h2 class="text-xl font-bold tracking-[-0.015em]">Market Insights</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium transition-colors hover:text-[var(--primary-color)]" href="#">Solutions</a>
+<a class="text-sm font-medium transition-colors hover:text-[var(--primary-color)]" href="#">Resources</a>
+<a class="text-sm font-medium transition-colors hover:text-[var(--primary-color)]" href="#">Pricing</a>
+</nav>
+<div class="flex items-center gap-2">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#282839] text-sm font-bold leading-normal tracking-[0.015em] transition-colors hover:bg-[#3b3b54]">
+<span class="truncate">Log In</span>
+</button>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[var(--primary-color)] text-sm font-bold leading-normal tracking-[0.015em] transition-transform hover:scale-105">
+<span class="truncate">Get Started</span>
+</button>
+<button class="md:hidden p-2 rounded-lg bg-[#282839]">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="flex-1">
+<section class="relative min-h-[60vh] flex items-center justify-center text-center px-4 py-20">
+<div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style='background-image: linear-gradient(rgba(17, 17, 24, 0.9) 0%, rgba(17, 17, 24, 0.6) 50%, rgba(17, 17, 24, 0.9) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCjW7M2m7zE11tOQM-gOstaqCg6yZH-u1QAeAKkJnNJHYAbOg2Pph-NM14Ji8oO6ngFQucjbtIPUrCVIqJxnjUNhzYKjUbZrph7uXvUQ0QUnQ6AhK_oUKZfh4f1wxvlPnxoQlQAUrLjdXAMRBBJ-wAQoVMpkMSFaLOYroX3BJuTMSAAwC8TUg0xRWHnJbKaamg44GzHMAORAZ18U_XPucS-7R99UgHubjGYW8DbIiwENZjILZ6cWBrHcgtC14KBxSBtlXk0uMXjACAQ");'></div>
+<div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+<div class="relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-6">
+<h1 class="text-4xl md:text-6xl font-black tracking-tighter animate-fade-in-down">
+              Unlock Market Potential with
+              <span class="text-[var(--primary-color)]">AI-Powered Insights</span>
+</h1>
+<p class="text-base md:text-lg text-gray-300 max-w-2xl animate-fade-in-up">
+              Gain a competitive edge with our lightning-fast delivery and unbeatable pricing. Identify key consumer segments, analyze competitors, and stay ahead of market trends.
+            </p>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-[var(--primary-color)] text-base font-bold tracking-[0.015em] transition-transform hover:scale-105 animate-fade-in-up">
+<span class="truncate">Get Started Now</span>
+</button>
+</div>
+</section>
+<section class="px-4 md:px-10 lg:px-20 py-16 lg:py-24" id="why-choose-us">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-12">
+<h2 class="text-3xl md:text-4xl font-bold tracking-tighter">Why Choose Us?</h2>
+<p class="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">
+                Our platform combines cutting-edge AI with market research expertise to deliver actionable insights that drive business growth.
+              </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="flex flex-col gap-4 rounded-xl border border-[#3b3b54] bg-[#1c1c27] p-6 transition-all hover:border-[var(--primary-color)] hover:shadow-2xl hover:shadow-[var(--primary-color)]/10">
+<div class="text-[var(--primary-color)]" data-icon="Lightning" data-size="32px" data-weight="regular">
+<svg fill="currentColor" height="32px" viewBox="0 0 256 256" width="32px" xmlns="http://www.w3.org/2000/svg">
+<path d="M215.79,118.17a8,8,0,0,0-5-5.66L153.18,90.9l14.66-73.33a8,8,0,0,0-13.69-7l-112,120a8,8,0,0,0,3,13l57.63,21.61L88.16,238.43a8,8,0,0,0,13.69,7l112-120A8,8,0,0,0,215.79,118.17ZM109.37,214l10.47-52.38a8,8,0,0,0-5-9.06L62,132.71l84.62-90.66L136.16,94.43a8,8,0,0,0,5,9.06l52.8,19.8Z"></path>
+</svg>
+</div>
+<h3 class="text-xl font-bold">Lightning Fast Delivery</h3>
+<p class="text-[#9d9db9] text-sm">Receive comprehensive market reports within hours, not weeks.</p>
+</div>
+<div class="flex flex-col gap-4 rounded-xl border border-[#3b3b54] bg-[#1c1c27] p-6 transition-all hover:border-[var(--primary-color)] hover:shadow-2xl hover:shadow-[var(--primary-color)]/10">
+<div class="text-[var(--primary-color)]" data-icon="CurrencyDollar" data-size="32px" data-weight="regular">
+<svg fill="currentColor" height="32px" viewBox="0 0 256 256" width="32px" xmlns="http://www.w3.org/2000/svg">
+<path d="M152,120H136V56h8a32,32,0,0,1,32,32,8,8,0,0,0,16,0,48.05,48.05,0,0,0-48-48h-8V24a8,8,0,0,0-16,0V40h-8a48,48,0,0,0,0,96h8v64H104a32,32,0,0,1-32-32,8,8,0,0,0-16,0,48.05,48.05,0,0,0,48,48h16v16a8,8,0,0,0,16,0V216h16a48,48,0,0,0,0-96Zm-40,0a32,32,0,0,1,0-64h8v64Zm40,80H136V136h16a32,32,0,0,1,0,64Z"></path>
+</svg>
+</div>
+<h3 class="text-xl font-bold">Unbeatable Pricing</h3>
+<p class="text-[#9d9db9] text-sm">Access premium market research at a fraction of the cost of traditional methods.</p>
+</div>
+<div class="flex flex-col gap-4 rounded-xl border border-[#3b3b54] bg-[#1c1c27] p-6 transition-all hover:border-[var(--primary-color)] hover:shadow-2xl hover:shadow-[var(--primary-color)]/10">
+<div class="text-[var(--primary-color)]" data-icon="ChartLine" data-size="32px" data-weight="regular">
+<svg fill="currentColor" height="32px" viewBox="0 0 256 256" width="32px" xmlns="http://www.w3.org/2000/svg">
+<path d="M232,208a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8V48a8,8,0,0,1,16,0v94.37L90.73,98a8,8,0,0,1,10.07-.38l58.81,44.11L218.73,90a8,8,0,1,1,10.54,12l-64,56a8,8,0,0,1-10.07.38L96.39,114.29,40,163.63V200H224A8,8,0,0,1,232,208Z"></path>
+</svg>
+</div>
+<h3 class="text-xl font-bold">AI-Powered Insights</h3>
+<p class="text-[#9d9db9] text-sm">Leverage advanced AI algorithms to uncover hidden patterns and predict future trends.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-[#1c1c27] px-4 md:px-10 lg:px-20 py-16 lg:py-24" id="how-it-works">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-12">
+<h2 class="text-3xl md:text-4xl font-bold tracking-tighter">How It Works</h2>
+<p class="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">Our streamlined process ensures you get the insights you need quickly and efficiently.</p>
+</div>
+<div class="flex flex-col gap-8">
+<div class="flex justify-center gap-2 md:gap-4 p-2 bg-[#111118] rounded-full">
+<button :class="{ 'bg-[var(--primary-color)] text-white': activePill === 'api', 'text-gray-400 hover:text-white': activePill !== 'api' }" @click="activePill = 'api'" class="px-4 py-2 text-sm md:text-base font-medium rounded-full transition-colors">Real-time APIs</button>
+<button :class="{ 'bg-[var(--primary-color)] text-white': activePill === 'ml', 'text-gray-400 hover:text-white': activePill !== 'ml' }" @click="activePill = 'ml'" class="px-4 py-2 text-sm md:text-base font-medium rounded-full transition-colors">Machine Learning</button>
+<button :class="{ 'bg-[var(--primary-color)] text-white': activePill === 'predictive', 'text-gray-400 hover:text-white': activePill !== 'predictive' }" @click="activePill = 'predictive'" class="px-4 py-2 text-sm md:text-base font-medium rounded-full transition-colors">Predictive Analytics</button>
+</div>
+<div class="relative min-h-[300px]">
+<div class="absolute inset-0 bg-[#111118] p-8 rounded-xl border border-[#3b3b54]" x-show="activePill === 'api'" x-transition:enter="transition ease-out duration-300" x-transition:enter-end="opacity-100 transform scale-100" x-transition:enter-start="opacity-0 transform scale-95" x-transition:leave="transition ease-in duration-200" x-transition:leave-end="opacity-0 transform scale-95" x-transition:leave-start="opacity-100 transform scale-100">
+<h3 class="text-2xl font-bold text-[var(--primary-color)] mb-4">Real-time APIs</h3>
+<ul class="space-y-3 text-gray-300">
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-500 mt-1">check_circle</span> <span>Access a continuous stream of data from social media, news outlets, and industry-specific sources.</span></li>
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-500 mt-1">check_circle</span> <span>Monitor brand mentions, competitor activities, and customer sentiment as it happens.</span></li>
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-500 mt-1">check_circle</span> <span>Integrate our data directly into your existing workflows and business intelligence tools.</span></li>
+</ul>
+</div>
+<div class="absolute inset-0 bg-[#111118] p-8 rounded-xl border border-[#3b3b54]" x-show="activePill === 'ml'" x-transition:enter="transition ease-out duration-300" x-transition:enter-end="opacity-100 transform scale-100" x-transition:enter-start="opacity-0 transform scale-95" x-transition:leave="transition ease-in duration-200" x-transition:leave-end="opacity-0 transform scale-95" x-transition:leave-start="opacity-100 transform scale-100">
+<h3 class="text-2xl font-bold text-[var(--primary-color)] mb-4">Machine Learning</h3>
+<ul class="space-y-3 text-gray-300">
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-500 mt-1">check_circle</span> <span>Our algorithms analyze vast datasets to identify complex patterns and correlations invisible to the human eye.</span></li>
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-500 mt-1">check_circle</span> <span>Automated topic modeling and sentiment analysis to categorize and understand consumer conversations.</span></li>
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-500 mt-1">check_circle</span> <span>Dynamic customer segmentation based on behavior, demographics, and psychographics.</span></li>
+</ul>
+</div>
+<div class="absolute inset-0 bg-[#111118] p-8 rounded-xl border border-[#3b3b54]" x-show="activePill === 'predictive'" x-transition:enter="transition ease-out duration-300" x-transition:enter-end="opacity-100 transform scale-100" x-transition:enter-start="opacity-0 transform scale-95" x-transition:leave="transition ease-in duration-200" x-transition:leave-end="opacity-0 transform scale-95" x-transition:leave-start="opacity-100 transform scale-100">
+<h3 class="text-2xl font-bold text-[var(--primary-color)] mb-4">Predictive Analytics</h3>
+<ul class="space-y-3 text-gray-300">
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-500 mt-1">check_circle</span> <span>Forecast future market trends, consumer behavior, and demand with high accuracy.</span></li>
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-500 mt-1">check_circle</span> <span>Identify potential risks and opportunities before they impact your business.</span></li>
+<li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-500 mt-1">check_circle</span> <span>Optimize marketing campaigns and product launches based on predictive insights.</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="px-4 md:px-10 lg:px-20 py-16 lg:py-24" id="pricing">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-12">
+<h2 class="text-3xl md:text-4xl font-bold tracking-tighter">Flexible Pricing for Every Need</h2>
+<p class="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">Choose the plan that's right for you and unlock the power of AI-driven market research.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+<div class="flex flex-col gap-6 rounded-xl border border-solid border-[#3b3b54] bg-[#1c1c27] p-8 h-full">
+<div class="flex flex-col gap-2">
+<h3 class="text-2xl font-bold">Basic</h3>
+<p class="flex items-baseline gap-1">
+<span class="text-5xl font-black tracking-tighter">$99</span>
+<span class="text-base font-bold text-gray-400">/month</span>
+</p>
+</div>
+<ul class="flex flex-col gap-3 flex-1">
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500">check_circle</span> <span>Access to basic reports</span></li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500">check_circle</span> <span>Limited data sources</span></li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500">check_circle</span> <span>Email support</span></li>
+</ul>
+<button class="w-full flex items-center justify-center rounded-lg h-12 px-6 bg-[#282839] text-base font-bold transition-colors hover:bg-[#3b3b54]">Choose Plan</button>
+</div>
+<div class="flex flex-col gap-6 rounded-xl border-2 border-solid border-[var(--primary-color)] bg-[#1c1c27] p-8 relative h-full">
+<div class="absolute top-0 right-8 -translate-y-1/2 bg-[var(--primary-color)] px-4 py-1 text-sm font-bold rounded-full">Best Value</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-2xl font-bold">Pro</h3>
+<p class="flex items-baseline gap-1">
+<span class="text-5xl font-black tracking-tighter">$299</span>
+<span class="text-base font-bold text-gray-400">/month</span>
+</p>
+</div>
+<ul class="flex flex-col gap-3 flex-1">
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500">check_circle</span> <span>Access to advanced reports</span></li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500">check_circle</span> <span>Expanded data sources</span></li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500">check_circle</span> <span>Priority support</span></li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500">check_circle</span> <span>Customizable dashboards</span></li>
+</ul>
+<button class="w-full flex items-center justify-center rounded-lg h-12 px-6 bg-[var(--primary-color)] text-base font-bold transition-transform hover:scale-105">Choose Plan</button>
+</div>
+<div class="flex flex-col gap-6 rounded-xl border border-solid border-[#3b3b54] bg-[#1c1c27] p-8 h-full">
+<div class="flex flex-col gap-2">
+<h3 class="text-2xl font-bold">Enterprise</h3>
+<span class="text-4xl font-black tracking-tighter">Contact Us</span>
+</div>
+<ul class="flex flex-col gap-3 flex-1">
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500">check_circle</span> <span>Unlimited access to all features</span></li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500">check_circle</span> <span>Dedicated account manager</span></li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500">check_circle</span> <span>Custom research solutions</span></li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-green-500">check_circle</span> <span>API access</span></li>
+</ul>
+<button class="w-full flex items-center justify-center rounded-lg h-12 px-6 bg-[#282839] text-base font-bold transition-colors hover:bg-[#3b3b54]">Contact Us</button>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-[#1c1c27] px-4 md:px-10 lg:px-20 py-16 lg:py-24" id="testimonials">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-12">
+<h2 class="text-3xl md:text-4xl font-bold tracking-tighter">Loved by Industry Leaders</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="flex flex-col gap-6 rounded-xl bg-[#111118] p-6">
+<div class="flex items-center gap-4">
+<img alt="Sarah Chen" class="w-16 h-16 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfO3FHikpcDXwT815hKU6aOJNxwOPgbMOLGHfCzMAEXEOCAZf-rwHF0w7KQQln-Rm4EietWNcfOuv_IIBVxnpfmJivIEuhSHlo9aDUuVr7iOgOWmctKIz015nPJPvluLnN4BQP9_shwqDAtZXIet8avZpxlmABoTxDntIaEGRhSlxCGutp0KHOYvVYxkEz6WQKZAfprLlLuXZxfcQcTdp_i8NqaI7JyduOSGFdKbcN_OAFMDPIWzMwU2hyRKaREbK9jM7b9aaZ4acU"/>
+<div>
+<p class="font-bold">Sarah Chen</p>
+<p class="text-sm text-gray-400">Marketing Director, Innovate Solutions</p>
+</div>
+</div>
+<p class="text-gray-300">"Market Insights has revolutionized our market research process. The speed and accuracy of the reports are unmatched."</p>
+</div>
+<div class="flex flex-col gap-6 rounded-xl bg-[#111118] p-6">
+<div class="flex items-center gap-4">
+<img alt="David Lee" class="w-16 h-16 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATq26eoPTVr2ESGQ8nd36i-CwYFg1Tqrfog5qbU-E9TdACkE1zcWvScffjuJSRY0rL0mNtEbaUR3gowCKDxZmzzZOsDB8v9QMGqx41psGzhg5XDcjAZra06D2jeRL8dZJ8CGCmy1TR0jiOigLpi7l46EmVndlmu1nHtT2qaeDRH54V_PDb2k01yTPYrSaZUi6nNaZOVZlhByd7Yy9ypvUJ43uBlWtxE7CAzfWnwx6C47exDouAcSEIaRGAcekM-FOvdfKLxRMGfDjm"/>
+<div>
+<p class="font-bold">David Lee</p>
+<p class="text-sm text-gray-400">CEO, Growth Ventures</p>
+</div>
+</div>
+<p class="text-gray-300">"The insights we've gained from Market Insights have been instrumental in our product development and marketing strategies."</p>
+</div>
+<div class="flex flex-col gap-6 rounded-xl bg-[#111118] p-6">
+<div class="flex items-center gap-4">
+<img alt="Emily Rodriguez" class="w-16 h-16 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6kmy4Qu-RFgANwEIwIXqAQFdq-WLv86h2c6aKbmX6ttHe-_r3QupFaYtCmML7ETcd0bM1WF5tzJcMq1OKx0ih6XrohrUDIRNmAhhPb7Nj1PZ3to1DVjDqNGsCpDptsBl12AY1gzc1RtQPZdeHGAm2j8t5NB_yhGf4_oIrqi6n8ZAwluhI4DC5QpymkK9toyDIaJYgYXonl3Q5pgoruuFhm07UAMKlyW_4srRU5BfJvQQacij_gVwqX_AQZiLzknt2yh11iJJhqJ9D"/>
+<div>
+<p class="font-bold">Emily Rodriguez</p>
+<p class="text-sm text-gray-400">Product Manager, Future Tech</p>
+</div>
+</div>
+<p class="text-gray-300">"We were amazed by the depth of analysis and the actionable recommendations provided by Market Insights."</p>
+</div>
+</div>
+</div>
+</section>
+<section class="px-4 md:px-10 lg:px-20 py-16 lg:py-24 text-center">
+<div class="max-w-3xl mx-auto">
+<h2 class="text-3xl md:text-4xl font-bold tracking-tighter">Ready to Transform Your Market Research?</h2>
+<p class="mt-4 text-lg text-gray-400">Join thousands of businesses that are leveraging Market Insights to gain a competitive advantage.</p>
+<div class="mt-8 flex justify-center">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-[var(--primary-color)] text-base font-bold tracking-[0.015em] transition-transform hover:scale-105">
+<span class="truncate">Get Started for Free</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<footer class="border-t border-solid border-[#282839] bg-[#1c1c27]">
+<div class="max-w-7xl mx-auto px-4 md:px-10 lg:px-20 py-12">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div class="flex flex-col gap-4 items-start">
+<div class="flex items-center gap-2">
+<svg class="size-6 text-[var(--primary-color)]" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M6 6H42L36 24L42 42H6L12 24L6 6Z" fill="currentColor"></path></svg>
+<h2 class="text-lg font-bold">Market Insights</h2>
+</div>
+<p class="text-sm text-gray-400">AI-Powered Market Research</p>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="font-bold text-gray-300">Navigation</h3>
+<a class="text-sm text-gray-400 hover:text-white" href="#">About Us</a>
+<a class="text-sm text-gray-400 hover:text-white" href="#">Contact</a>
+<a class="text-sm text-gray-400 hover:text-white" href="#">Pricing</a>
+<a class="text-sm text-gray-400 hover:text-white" href="#">Resources</a>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="font-bold text-gray-300">Legal</h3>
+<a class="text-sm text-gray-400 hover:text-white" href="#">Privacy Policy</a>
+<a class="text-sm text-gray-400 hover:text-white" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="font-bold text-gray-300">Connect</h3>
+<div class="flex gap-4">
+<a class="text-gray-400 hover:text-white" href="#">
+<svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M247.39,68.94A8,8,0,0,0,240,64H209.57A48.66,48.66,0,0,0,168.1,40a46.91,46.91,0,0,0-33.75,13.7A47.9,47.9,0,0,0,120,88v6.09C79.74,83.47,46.81,50.72,46.46,50.37a8,8,0,0,0-13.65,4.92c-4.31,47.79,9.57,79.77,22,98.18a110.93,110.93,0,0,0,21.88,24.2c-15.23,17.53-39.21,26.74-39.47,26.84a8,8,0,0,0-3.85,11.93c.75,1.12,3.75,5.05,11.08,8.72C53.51,229.7,65.48,232,80,232c70.67,0,129.72-54.42,135.75-124.44l29.91-29.9A8,8,0,0,0,247.39,68.94Zm-45,29.41a8,8,0,0,0-2.32,5.14C196,166.58,143.28,216,80,216c-10.56,0-18-1.4-23.22-3.08,11.51-6.25,27.56-17,37.88-32.48A8,8,0,0,0,92,169.08c-.47-.27-43.91-26.34-44-96,16,13,45.25,33.17,78.67,38.79A8,8,0,0,0,136,104V88a32,32,0,0,1,9.6-22.92A30.94,30.94,0,0,1,167.9,56c12.66.16,24.49,7.88,29.44,19.21A8,8,0,0,0,204.67,80h16Z"></path>
+</svg>
+</a>
+<a class="text-gray-400 hover:text-white" href="#">
+<svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"></path>
+</svg>
+</a>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-8 border-t border-solid border-[#282839] text-center text-sm text-gray-500">
+<p>© 2023 Market Insights. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</div>
+<script defer="" src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<style>
+      @keyframes fade-in-down {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fade-in-up {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-in-down {
+        animation: fade-in-down 0.8s ease-out forwards;
+      }
+      .animate-fade-in-up {
+        animation: fade-in-up 0.8s ease-out 0.2s forwards;
+        opacity: 0;
+      }
+      .bg-grid-pattern {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 2rem 2rem;
+      }
+    </style>
+</body></html>
