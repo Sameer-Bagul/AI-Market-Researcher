@@ -145,7 +145,7 @@ export default function Services() {
                 Start your free trial today and gain access to our comprehensive suite of services.
               </p>
               <div className="mt-8 flex justify-center">
-                <Link href="/login">
+                <Link href="/auth">
                   <Button
                     className="bg-primary hover:bg-primary/90 px-6"
                     data-testid="services-cta-button"

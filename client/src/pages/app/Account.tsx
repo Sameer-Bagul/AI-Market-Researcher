@@ -18,10 +18,8 @@ export default function Account() {
 
   const updateCreditsMutation = useMutation({
     mutationFn: async (newCredits: number) => {
-      return await apiRequest("/api/users/credits", {
-        method: "POST",
-        body: JSON.stringify({ credits: newCredits }),
-      });
+      const response = await apiRequest("POST", "/api/users/credits", { credits: newCredits });
+      return await response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/auth/user"] });

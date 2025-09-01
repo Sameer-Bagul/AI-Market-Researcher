@@ -12,7 +12,8 @@ export default function Studies() {
     queryKey: ["/api/studies"],
   });
 
-  const filteredStudies = studies.filter((study: any) =>
+  const studiesArray = Array.isArray(studies) ? studies : [];
+  const filteredStudies = studiesArray.filter((study: any) =>
     study.industryName.toLowerCase().includes(searchTerm.toLowerCase()) ||
     study.companyType.toLowerCase().includes(searchTerm.toLowerCase()) ||
     study.reportScope.toLowerCase().includes(searchTerm.toLowerCase())
@@ -72,7 +73,7 @@ export default function Studies() {
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <span className="material-symbols-outlined">filter_list</span>
               <span>
-                {filteredStudies.length} of {studies.length} studies
+                {filteredStudies.length} of {studiesArray.length} studies
               </span>
             </div>
           </div>

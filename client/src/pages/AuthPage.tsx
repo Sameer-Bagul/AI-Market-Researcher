@@ -1,15 +1,6 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, useLocation } from "wouter";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
 import { useAuth } from "@/hooks/useAuth";
-import { registerSchema, loginSchema } from "@shared/schema";
 import { useEffect } from "react";
 
 // Country options
@@ -97,6 +88,27 @@ export default function AuthPage() {
   const [, setLocation] = useLocation();
   const { isAuthenticated, loginMutation, registerMutation } = useAuth();
 
+  // Login form state
+  const [loginForm, setLoginForm] = useState({
+    email: "",
+    password: ""
+  });
+
+  // Register form state
+  const [registerForm, setRegisterForm] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    firstName: "",
+    lastName: "",
+    country: "",
+    contactNumber: "",
+    industry: ""
+  });
+
+  // Form errors
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
   // Redirect if already authenticated
   useEffect(() => {
     if (isAuthenticated) {
@@ -104,42 +116,101 @@ export default function AuthPage() {
     }
   }, [isAuthenticated, setLocation]);
 
-  const loginForm = useForm({
-    resolver: zodResolver(loginSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
-  const registerForm = useForm({
-    resolver: zodResolver(registerSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-      confirmPassword: "",
-      firstName: "",
-      lastName: "",
-      country: "",
-      contactNumber: "",
-      industry: "",
-    },
-    mode: "onChange", // Enable real-time validation
-  });
+  const validatePassword = (password: string) => {
+    const minLength = password.length >= 8;
+    const hasUpper = /[A-Z]/.test(password);
+    const hasLower = /[a-z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSpecial = /[^A-Za-z0-9]/.test(password);
+    
+    return minLength && hasUpper && hasLower && hasNumber && hasSpecial;
+  };
 
-  const handleLogin = (data: any) => {
-    loginMutation.mutate(data, {
+  const handleLoginSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const newErrors: Record<string, string> = {};
+
+    if (!loginForm.email) {
+      newErrors.email = "Email is required";
+    } else if (!validateEmail(loginForm.email)) {
+      newErrors.email = "Invalid email format";
+    }
+
+    if (!loginForm.password) {
+      newErrors.password = "Password is required";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    setErrors({});
+    loginMutation.mutate(loginForm, {
       onSuccess: () => {
         setLocation("/app");
       },
     });
   };
 
-  const handleRegister = (data: any) => {
+  const handleRegisterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const newErrors: Record<string, string> = {};
+
+    if (!registerForm.firstName) {
+      newErrors.firstName = "First name is required";
+    }
+
+    if (!registerForm.lastName) {
+      newErrors.lastName = "Last name is required";
+    }
+
+    if (!registerForm.email) {
+      newErrors.email = "Email is required";
+    } else if (!validateEmail(registerForm.email)) {
+      newErrors.email = "Invalid email format";
+    }
+
+    if (!registerForm.country) {
+      newErrors.country = "Country is required";
+    }
+
+    if (!registerForm.contactNumber) {
+      newErrors.contactNumber = "Contact number is required";
+    }
+
+    if (!registerForm.industry) {
+      newErrors.industry = "Industry is required";
+    }
+
+    if (!registerForm.password) {
+      newErrors.password = "Password is required";
+    } else if (!validatePassword(registerForm.password)) {
+      newErrors.password = "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character";
+    }
+
+    if (!registerForm.confirmPassword) {
+      newErrors.confirmPassword = "Please confirm your password";
+    } else if (registerForm.password !== registerForm.confirmPassword) {
+      newErrors.confirmPassword = "Passwords don't match";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    setErrors({});
+    
     // Combine country code with contact number
     const formData = {
-      ...data,
-      contactNumber: `${countryCode} ${data.contactNumber}`
+      ...registerForm,
+      contactNumber: `${countryCode} ${registerForm.contactNumber}`
     };
     
     registerMutation.mutate(formData, {
@@ -162,272 +233,291 @@ export default function AuthPage() {
       <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-8 items-center">
         {/* Left side - Form */}
         <div className="w-full max-w-md mx-auto">
-          <Card className="shadow-2xl border-0 bg-card/50 backdrop-blur-sm">
-            <CardHeader className="text-center">
-              <CardTitle className="text-2xl font-bold">
+          <div className="bg-card/50 backdrop-blur-sm shadow-2xl border rounded-lg">
+            <div className="p-6 text-center border-b">
+              <h1 className="text-2xl font-bold">
                 {isLogin ? "Welcome Back" : "Create Account"}
-              </CardTitle>
-              <CardDescription>
+              </h1>
+              <p className="text-muted-foreground mt-2">
                 {isLogin 
                   ? "Sign in to access your market research dashboard" 
                   : "Join us to unlock powerful market insights"
                 }
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
+              </p>
+            </div>
+            <div className="p-6 space-y-6">
               {isLogin ? (
-                <Form {...loginForm}>
-                  <form onSubmit={loginForm.handleSubmit(handleLogin)} className="space-y-4">
-                    <FormField
-                      control={loginForm.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Email</FormLabel>
-                          <FormControl>
-                            <Input 
-                              type="email" 
-                              placeholder="Enter your email" 
-                              data-testid="input-email" 
-                              {...field} 
-                            />
-                          </FormControl>
-                          <FormMessage data-testid="error-email" />
-                        </FormItem>
-                      )}
+                <form onSubmit={handleLoginSubmit} className="space-y-4">
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium mb-2">
+                      Email
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      value={loginForm.email}
+                      onChange={(e) => setLoginForm({...loginForm, email: e.target.value})}
+                      className="w-full px-3 py-2 border border-border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                      placeholder="Enter your email"
+                      data-testid="input-email"
                     />
-                    <FormField
-                      control={loginForm.control}
-                      name="password"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Password</FormLabel>
-                          <FormControl>
-                            <Input 
-                              type="password" 
-                              placeholder="Enter your password" 
-                              data-testid="input-password"
-                              {...field} 
-                            />
-                          </FormControl>
-                          <FormMessage data-testid="error-password" />
-                        </FormItem>
-                      )}
+                    {errors.email && (
+                      <p className="text-destructive text-sm mt-1" data-testid="error-email">
+                        {errors.email}
+                      </p>
+                    )}
+                  </div>
+                  <div>
+                    <label htmlFor="password" className="block text-sm font-medium mb-2">
+                      Password
+                    </label>
+                    <input
+                      id="password"
+                      type="password"
+                      value={loginForm.password}
+                      onChange={(e) => setLoginForm({...loginForm, password: e.target.value})}
+                      className="w-full px-3 py-2 border border-border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                      placeholder="Enter your password"
+                      data-testid="input-password"
                     />
-                    <Button 
-                      type="submit" 
-                      className="w-full" 
-                      disabled={loginMutation.isPending}
-                      data-testid="button-login"
-                    >
-                      {loginMutation.isPending ? "Signing in..." : "Sign In"}
-                    </Button>
-                  </form>
-                </Form>
+                    {errors.password && (
+                      <p className="text-destructive text-sm mt-1" data-testid="error-password">
+                        {errors.password}
+                      </p>
+                    )}
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={loginMutation.isPending}
+                    className="w-full bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50"
+                    data-testid="button-login"
+                  >
+                    {loginMutation.isPending ? "Signing in..." : "Sign In"}
+                  </button>
+                </form>
               ) : (
-                <Form {...registerForm}>
-                  <form onSubmit={registerForm.handleSubmit(handleRegister)} className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <FormField
-                        control={registerForm.control}
-                        name="firstName"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>First Name *</FormLabel>
-                            <FormControl>
-                              <Input placeholder="John" data-testid="input-firstName" {...field} />
-                            </FormControl>
-                            <FormMessage data-testid="error-firstName" />
-                          </FormItem>
-                        )}
+                <form onSubmit={handleRegisterSubmit} className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="firstName" className="block text-sm font-medium mb-2">
+                        First Name *
+                      </label>
+                      <input
+                        id="firstName"
+                        type="text"
+                        value={registerForm.firstName}
+                        onChange={(e) => setRegisterForm({...registerForm, firstName: e.target.value})}
+                        className="w-full px-3 py-2 border border-border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        placeholder="John"
+                        data-testid="input-firstName"
                       />
-                      <FormField
-                        control={registerForm.control}
-                        name="lastName"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Last Name *</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Doe" data-testid="input-lastName" {...field} />
-                            </FormControl>
-                            <FormMessage data-testid="error-lastName" />
-                          </FormItem>
-                        )}
+                      {errors.firstName && (
+                        <p className="text-destructive text-sm mt-1" data-testid="error-firstName">
+                          {errors.firstName}
+                        </p>
+                      )}
+                    </div>
+                    <div>
+                      <label htmlFor="lastName" className="block text-sm font-medium mb-2">
+                        Last Name *
+                      </label>
+                      <input
+                        id="lastName"
+                        type="text"
+                        value={registerForm.lastName}
+                        onChange={(e) => setRegisterForm({...registerForm, lastName: e.target.value})}
+                        className="w-full px-3 py-2 border border-border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        placeholder="Doe"
+                        data-testid="input-lastName"
+                      />
+                      {errors.lastName && (
+                        <p className="text-destructive text-sm mt-1" data-testid="error-lastName">
+                          {errors.lastName}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium mb-2">
+                      Email *
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      value={registerForm.email}
+                      onChange={(e) => setRegisterForm({...registerForm, email: e.target.value})}
+                      className="w-full px-3 py-2 border border-border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                      placeholder="john@example.com"
+                      data-testid="input-email"
+                    />
+                    {errors.email && (
+                      <p className="text-destructive text-sm mt-1" data-testid="error-email">
+                        {errors.email}
+                      </p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label htmlFor="country" className="block text-sm font-medium mb-2">
+                      Country *
+                    </label>
+                    <select
+                      id="country"
+                      value={registerForm.country}
+                      onChange={(e) => setRegisterForm({...registerForm, country: e.target.value})}
+                      className="w-full px-3 py-2 border border-border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                      data-testid="select-country"
+                    >
+                      <option value="">Select your country</option>
+                      {countries.map((country) => (
+                        <option key={country} value={country}>
+                          {country}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.country && (
+                      <p className="text-destructive text-sm mt-1" data-testid="error-country">
+                        {errors.country}
+                      </p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label htmlFor="contactNumber" className="block text-sm font-medium mb-2">
+                      Contact Number *
+                    </label>
+                    <div className="flex gap-2">
+                      <select
+                        value={countryCode}
+                        onChange={(e) => setCountryCode(e.target.value)}
+                        className="w-24 px-3 py-2 border border-border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        data-testid="select-country-code"
+                      >
+                        {countryCodes.map((item) => (
+                          <option key={item.code} value={item.code}>
+                            {item.code}
+                          </option>
+                        ))}
+                      </select>
+                      <input
+                        id="contactNumber"
+                        type="text"
+                        value={registerForm.contactNumber}
+                        onChange={(e) => setRegisterForm({...registerForm, contactNumber: e.target.value})}
+                        className="flex-1 px-3 py-2 border border-border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        placeholder="1234567890"
+                        data-testid="input-contact-number"
                       />
                     </div>
-                    
-                    <FormField
-                      control={registerForm.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Email *</FormLabel>
-                          <FormControl>
-                            <Input 
-                              type="email" 
-                              placeholder="john@example.com" 
-                              data-testid="input-email"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage data-testid="error-email" />
-                        </FormItem>
-                      )}
-                    />
+                    {errors.contactNumber && (
+                      <p className="text-destructive text-sm mt-1" data-testid="error-contactNumber">
+                        {errors.contactNumber}
+                      </p>
+                    )}
+                  </div>
 
-                    <FormField
-                      control={registerForm.control}
-                      name="country"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Country *</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger data-testid="select-country">
-                                <SelectValue placeholder="Select your country" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              {countries.map((country) => (
-                                <SelectItem key={country} value={country}>
-                                  {country}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <FormMessage data-testid="error-country" />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={registerForm.control}
-                      name="contactNumber"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Contact Number *</FormLabel>
-                          <div className="flex gap-2">
-                            <Select defaultValue="+1" onValueChange={setCountryCode}>
-                              <SelectTrigger className="w-24" data-testid="select-country-code">
-                                <SelectValue />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {countryCodes.map((item) => (
-                                  <SelectItem key={item.code} value={item.code}>
-                                    {item.code}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                            <FormControl>
-                              <Input 
-                                placeholder="1234567890" 
-                                data-testid="input-contact-number"
-                                {...field} 
-                              />
-                            </FormControl>
-                          </div>
-                          <FormMessage data-testid="error-contactNumber" />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={registerForm.control}
-                      name="industry"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Industry *</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger data-testid="select-industry">
-                                <SelectValue placeholder="Select your industry" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              {industries.map((industry) => (
-                                <SelectItem key={industry} value={industry}>
-                                  {industry}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <FormMessage data-testid="error-industry" />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={registerForm.control}
-                      name="password"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Password *</FormLabel>
-                          <FormControl>
-                            <Input 
-                              type="password" 
-                              placeholder="Choose a secure password" 
-                              data-testid="input-password"
-                              {...field} 
-                            />
-                          </FormControl>
-                          <div className="text-xs text-muted-foreground space-y-1">
-                            <p>Password must contain:</p>
-                            <ul className="list-disc list-inside space-y-0.5">
-                              <li>At least 8 characters</li>
-                              <li>One uppercase letter</li>
-                              <li>One lowercase letter</li>
-                              <li>One number</li>
-                              <li>One special character</li>
-                            </ul>
-                          </div>
-                          <FormMessage data-testid="error-password" />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={registerForm.control}
-                      name="confirmPassword"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Re-enter Password *</FormLabel>
-                          <FormControl>
-                            <Input 
-                              type="password" 
-                              placeholder="Confirm your password" 
-                              data-testid="input-confirm-password"
-                              {...field} 
-                            />
-                          </FormControl>
-                          <FormMessage data-testid="error-confirmPassword" />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <Button 
-                      type="submit" 
-                      className="w-full" 
-                      disabled={registerMutation.isPending}
-                      data-testid="button-register"
+                  <div>
+                    <label htmlFor="industry" className="block text-sm font-medium mb-2">
+                      Industry *
+                    </label>
+                    <select
+                      id="industry"
+                      value={registerForm.industry}
+                      onChange={(e) => setRegisterForm({...registerForm, industry: e.target.value})}
+                      className="w-full px-3 py-2 border border-border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                      data-testid="select-industry"
                     >
-                      {registerMutation.isPending ? "Creating account..." : "Create Account"}
-                    </Button>
-                  </form>
-                </Form>
+                      <option value="">Select your industry</option>
+                      {industries.map((industry) => (
+                        <option key={industry} value={industry}>
+                          {industry}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.industry && (
+                      <p className="text-destructive text-sm mt-1" data-testid="error-industry">
+                        {errors.industry}
+                      </p>
+                    )}
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="password" className="block text-sm font-medium mb-2">
+                      Password *
+                    </label>
+                    <input
+                      id="password"
+                      type="password"
+                      value={registerForm.password}
+                      onChange={(e) => setRegisterForm({...registerForm, password: e.target.value})}
+                      className="w-full px-3 py-2 border border-border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                      placeholder="Choose a secure password"
+                      data-testid="input-password"
+                    />
+                    <div className="text-xs text-muted-foreground space-y-1 mt-2">
+                      <p>Password must contain:</p>
+                      <ul className="list-disc list-inside space-y-0.5">
+                        <li>At least 8 characters</li>
+                        <li>One uppercase letter</li>
+                        <li>One lowercase letter</li>
+                        <li>One number</li>
+                        <li>One special character</li>
+                      </ul>
+                    </div>
+                    {errors.password && (
+                      <p className="text-destructive text-sm mt-1" data-testid="error-password">
+                        {errors.password}
+                      </p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label htmlFor="confirmPassword" className="block text-sm font-medium mb-2">
+                      Re-enter Password *
+                    </label>
+                    <input
+                      id="confirmPassword"
+                      type="password"
+                      value={registerForm.confirmPassword}
+                      onChange={(e) => setRegisterForm({...registerForm, confirmPassword: e.target.value})}
+                      className="w-full px-3 py-2 border border-border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                      placeholder="Confirm your password"
+                      data-testid="input-confirm-password"
+                    />
+                    {errors.confirmPassword && (
+                      <p className="text-destructive text-sm mt-1" data-testid="error-confirmPassword">
+                        {errors.confirmPassword}
+                      </p>
+                    )}
+                  </div>
+                  
+                  <button
+                    type="submit"
+                    disabled={registerMutation.isPending}
+                    className="w-full bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50"
+                    data-testid="button-register"
+                  >
+                    {registerMutation.isPending ? "Creating account..." : "Create Account"}
+                  </button>
+                </form>
               )}
 
               <div className="relative">
-                <Separator />
-                <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-card px-2 text-xs text-muted-foreground">
-                  or continue with
-                </span>
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-border"></div>
+                </div>
+                <div className="relative flex justify-center text-xs">
+                  <span className="bg-card px-2 text-muted-foreground">
+                    or continue with
+                  </span>
+                </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <Button 
-                  variant="outline" 
+                <button
                   onClick={() => handleOAuthLogin("google")}
+                  className="flex items-center justify-center px-4 py-2 border border-border rounded-md hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                   data-testid="button-google"
                 >
                   <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
@@ -449,44 +539,54 @@ export default function AuthPage() {
                     />
                   </svg>
                   Google
-                </Button>
-                <Button 
-                  variant="outline" 
+                </button>
+                <button
                   onClick={() => handleOAuthLogin("linkedin")}
+                  className="flex items-center justify-center px-4 py-2 border border-border rounded-md hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                   data-testid="button-linkedin"
                 >
                   <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                   </svg>
                   LinkedIn
-                </Button>
+                </button>
               </div>
 
               <div className="text-center">
-                <Button
-                  variant="link"
+                <button
                   onClick={() => {
                     setIsLogin(!isLogin);
-                    loginForm.reset();
-                    registerForm.reset();
+                    setLoginForm({ email: "", password: "" });
+                    setRegisterForm({
+                      email: "",
+                      password: "",
+                      confirmPassword: "",
+                      firstName: "",
+                      lastName: "",
+                      country: "",
+                      contactNumber: "",
+                      industry: ""
+                    });
+                    setErrors({});
                   }}
+                  className="text-primary hover:underline text-sm"
                   data-testid="button-switch-mode"
                 >
                   {isLogin 
                     ? "Don't have an account? Sign up" 
                     : "Already have an account? Sign in"
                   }
-                </Button>
+                </button>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
 
         {/* Right side - Hero content */}
         <div className="hidden lg:block">
           <div className="text-center space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
-              <span className="material-symbols-outlined text-sm">auto_awesome</span>
+              <span className="text-sm">⚡</span>
               AI-Powered Market Research
             </div>
             <h1 className="text-4xl font-bold text-foreground">
@@ -500,33 +600,25 @@ export default function AuthPage() {
             <div className="grid grid-cols-3 gap-6 pt-8">
               <div className="text-center">
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="material-symbols-outlined text-primary">speed</span>
+                  <span className="text-primary">⚡</span>
                 </div>
                 <h3 className="font-semibold mb-1">Lightning Fast</h3>
                 <p className="text-sm text-muted-foreground">Reports in minutes</p>
               </div>
               <div className="text-center">
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="material-symbols-outlined text-primary">psychology</span>
+                  <span className="text-primary">🧠</span>
                 </div>
                 <h3 className="font-semibold mb-1">AI-Powered</h3>
                 <p className="text-sm text-muted-foreground">Advanced algorithms</p>
               </div>
               <div className="text-center">
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="material-symbols-outlined text-primary">attach_money</span>
+                  <span className="text-primary">📊</span>
                 </div>
-                <h3 className="font-semibold mb-1">Affordable</h3>
-                <p className="text-sm text-muted-foreground">Unbeatable pricing</p>
+                <h3 className="font-semibold mb-1">Data-Driven</h3>
+                <p className="text-sm text-muted-foreground">Actionable insights</p>
               </div>
-            </div>
-            <div className="pt-6">
-              <Link href="/" data-testid="link-home">
-                <Button variant="outline" size="sm">
-                  <span className="material-symbols-outlined mr-2 text-sm">arrow_back</span>
-                  Back to Home
-                </Button>
-              </Link>
             </div>
           </div>
         </div>

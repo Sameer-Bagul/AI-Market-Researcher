@@ -70,7 +70,7 @@ export default function Home() {
               data-testid="hero-button-get-started"
               asChild
             >
-              <a href="/api/login">Get Started Now</a>
+              <a href="/auth">Get Started Now</a>
             </Button>
             <Button
               variant="outline"
@@ -299,7 +299,7 @@ export default function Home() {
             Join thousands of businesses who trust Market Insights Co. for their market research needs. Get started today and see the difference our AI-powered platform can make.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/login">
+            <Link href="/auth">
               <Button
                 variant="secondary"
                 size="lg"

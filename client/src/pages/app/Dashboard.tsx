@@ -11,9 +11,10 @@ export default function Dashboard() {
     queryKey: ["/api/studies"],
   });
 
-  const recentStudies = studies.slice(0, 3);
-  const completedStudies = studies.filter((study: any) => study.status === "completed").length;
-  const pendingStudies = studies.filter((study: any) => study.status === "pending").length;
+  const studiesArray = Array.isArray(studies) ? studies : [];
+  const recentStudies = studiesArray.slice(0, 3);
+  const completedStudies = studiesArray.filter((study: any) => study.status === "completed").length;
+  const pendingStudies = studiesArray.filter((study: any) => study.status === "pending").length;
 
   return (
     <div className="space-y-8 p-6 lg:p-10">
@@ -36,7 +37,7 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold" data-testid="total-studies-count">
-              {studiesLoading ? "..." : studies.length}
+              {studiesLoading ? "..." : studiesArray.length}
             </div>
             <p className="text-xs text-muted-foreground">
               All time research studies

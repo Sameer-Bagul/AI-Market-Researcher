@@ -42,7 +42,7 @@ export default function Pricing() {
                 </ul>
               </CardContent>
               <div className="p-8 pt-0">
-                <Link href="/login">
+                <Link href="/auth">
                   <Button
                     className="w-full bg-primary hover:bg-primary/90"
                     data-testid="pricing-purchase-button"
