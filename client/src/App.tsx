@@ -17,6 +17,13 @@ import Pricing from "@/pages/Pricing";
 import AuthPage from "@/pages/AuthPage";
 import NotFound from "@/pages/not-found";
 
+// Policy pages
+import CancellationRefund from "@/pages/policies/CancellationRefund";
+import ContactUs from "@/pages/policies/ContactUs";
+import ShippingPolicy from "@/pages/policies/ShippingPolicy";
+import PrivacyPolicy from "@/pages/policies/PrivacyPolicy";
+import TermsConditions from "@/pages/policies/TermsConditions";
+
 // App components
 import AppLayout from "@/components/AppLayout";
 import Dashboard from "@/pages/app/Dashboard";
@@ -106,6 +113,11 @@ function AppRouter() {
           <Route path="/services" component={Services} />
           <Route path="/pricing" component={Pricing} />
           <Route path="/auth" component={AuthPage} />
+          <Route path="/cancellation-refund" component={CancellationRefund} />
+          <Route path="/contact-us" component={ContactUs} />
+          <Route path="/shipping-policy" component={ShippingPolicy} />
+          <Route path="/privacy-policy" component={PrivacyPolicy} />
+          <Route path="/terms-conditions" component={TermsConditions} />
           <Route component={NotFound} />
         </Switch>
       </main>

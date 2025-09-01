@@ -15,18 +15,18 @@ export default function Footer() {
       title: "Company",
       links: [
         { label: "About Us", href: "/about" },
+        { label: "Contact Us", href: "/contact-us" },
         { label: "Careers", href: "/" },
         { label: "Press", href: "/" },
-        { label: "Contact Us", href: "/" },
       ],
     },
     {
-      title: "Resources",
+      title: "Legal",
       links: [
-        { label: "Blog", href: "/" },
-        { label: "Help Center", href: "/" },
-        { label: "API Docs", href: "/" },
-        { label: "Case Studies", href: "/" },
+        { label: "Terms & Conditions", href: "/terms-conditions" },
+        { label: "Privacy Policy", href: "/privacy-policy" },
+        { label: "Cancellation & Refund", href: "/cancellation-refund" },
+        { label: "Shipping Policy", href: "/shipping-policy" },
       ],
     },
   ];
